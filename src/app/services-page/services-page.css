@@ -1,0 +1,207 @@
+* {
+  box-sizing: border-box;
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #f8fafc;
+  color: #0f172a;
+}
+
+/* CONTAINER */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* HERO */
+.services-hero {
+  padding: 100px 0 80px;
+  background: linear-gradient(135deg, #eef2ff, #ecfeff);
+  text-align: center;
+}
+
+.services-hero h1 {
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.services-hero p {
+  font-size: 18px;
+  color: #475569;
+  margin-bottom: 32px;
+}
+
+/* SEARCH */
+.services-search {
+  display: flex;
+  gap: 12px;
+  max-width: 720px;
+  margin: auto;
+  background: white;
+  padding: 12px;
+  border-radius: 18px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+}
+
+.services-search input {
+  flex: 1;
+  padding: 14px;
+  border: none;
+  outline: none;
+  font-size: 15px;
+}
+
+.services-search button {
+  padding: 14px 26px;
+  border-radius: 14px;
+  border: none;
+  background: #4f46e5;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* SERVICES SECTION */
+.services-section {
+  padding: 80px 0;
+}
+
+.services-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.services-header h2 {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.services-header span {
+  font-size: 14px;
+  color: #64748b;
+}
+
+/* GRID */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 28px;
+}
+
+/* CARD */
+.service-card {
+  background: white;
+  border-radius: 22px;
+  padding: 24px;
+  box-shadow: 0 14px 34px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 44px rgba(0,0,0,0.12);
+}
+
+.service-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.service-top h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.rating {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.service-category {
+  margin: 12px 0 6px;
+  font-weight: 600;
+  color: #4f46e5;
+}
+
+.service-location,
+.service-phone {
+  font-size: 14px;
+  color: #475569;
+  margin: 4px 0;
+}
+
+/* ACTIONS */
+.service-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.btn {
+  flex: 1;
+  padding: 10px;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+}
+
+.call-btn {
+  background: #4f46e5;
+}
+
+.whatsapp-btn {
+  background: #16a34a;
+}
+
+/* BOOK BUTTON */
+.book-btn {
+  margin-top: 18px;
+  padding: 14px;
+  border-radius: 16px;
+  border: none;
+  background: #111827;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.book-btn:hover {
+  background: #000;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .services-search {
+    flex-direction: column;
+  }
+
+  .services-header {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+}
+
