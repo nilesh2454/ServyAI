@@ -80,20 +80,81 @@ html, body {
 }
 
 .services-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   margin-bottom: 40px;
 }
 
 .services-header h2 {
   font-size: 28px;
   font-weight: 700;
+  margin-bottom: 20px;
 }
 
-.services-header span {
+.filters-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 16px;
+  align-items: center;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.filter-select {
+  padding: 8px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.filter-select:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.results-count {
   font-size: 14px;
   color: #64748b;
+  margin-top: 12px;
+}
+
+.no-results {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.no-results p {
+  font-size: 18px;
+  color: #64748b;
+  margin-bottom: 20px;
+}
+
+.clear-filters-btn {
+  padding: 12px 24px;
+  border-radius: 12px;
+  border: none;
+  background: #4f46e5;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.clear-filters-btn:hover {
+  background: #4338ca;
 }
 
 /* GRID */
@@ -136,17 +197,77 @@ html, body {
   font-weight: 600;
 }
 
-.service-category {
-  margin: 12px 0 6px;
-  font-weight: 600;
-  color: #4f46e5;
+.service-category-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0;
 }
 
-.service-location,
-.service-phone {
+.service-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: #000000;
+  vertical-align: middle;
+}
+
+.service-category {
+  margin: 0;
+  font-weight: 600;
+  color: #4f46e5;
+  font-size: 16px;
+}
+
+.service-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   font-size: 14px;
   color: #475569;
-  margin: 4px 0;
+  align-items: center;
+}
+
+.info-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: #000000;
+  vertical-align: middle;
+}
+
+.price-item {
+  margin-top: 4px;
+  align-items: center;
+  display: flex;
+}
+
+.rupee-sign {
+  font-size: 20px;
+  font-weight: 700;
+  color: #000000;
+  line-height: 1;
+  vertical-align: middle;
+  display: inline-flex;
+  align-items: center;
+}
+
+.service-price-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: #000000;
+}
+
+.price-unit {
+  font-size: 14px;
+  color: #64748b;
 }
 
 /* ACTIONS */
@@ -164,15 +285,45 @@ html, body {
   font-weight: 600;
   text-align: center;
   text-decoration: none;
-  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.3s;
 }
 
 .call-btn {
-  background: #4f46e5;
+  background: white;
+  color: #4f46e5;
+  border: 2px solid #4f46e5;
+}
+
+.call-btn:hover {
+  background: #f0f4ff;
+}
+
+.btn-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  color: #000000;
+  vertical-align: middle;
 }
 
 .whatsapp-btn {
-  background: #16a34a;
+  background: white;
+  color: #16a34a;
+  border: 2px solid #16a34a;
+}
+
+.whatsapp-btn:hover {
+  background: #f0fdf4;
+}
+
+.whatsapp-icon {
+  width: 18px;
+  height: 18px;
+  fill: #16a34a;
 }
 
 /* BOOK BUTTON */
@@ -202,6 +353,20 @@ html, body {
     flex-direction: column;
     gap: 8px;
     align-items: flex-start;
+  }
+
+  .filters-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-select {
+    width: 100%;
   }
 }
 

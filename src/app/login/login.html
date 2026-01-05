@@ -1,1 +1,165 @@
-<p>login works!</p>
+<div class="login-container">
+  <div class="login-header">
+    <div class="container">
+      <h1>Welcome to ServyAI</h1>
+      <p>Login or register to book and track your services</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- User Login -->
+    <div class="login-content" *ngIf="activeTab === 'user-login'">
+      <div class="login-card">
+        <h2>User Login</h2>
+        
+
+        <form (ngSubmit)="onUserLogin()" class="login-form">
+          <div class="form-group">
+            <label for="user-login-email">Email</label>
+            <input 
+              type="email" 
+              id="user-login-email"
+              [(ngModel)]="userLoginForm.email"
+              name="userLoginEmail"
+              placeholder="your.email@example.com"
+              class="form-input"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="user-login-password">Password</label>
+            <input 
+              type="password" 
+              id="user-login-password"
+              [(ngModel)]="userLoginForm.password"
+              name="userLoginPassword"
+              placeholder="Enter password"
+              class="form-input"
+              required
+            />
+          </div>
+
+          <div class="error-message" *ngIf="userLoginError">
+            {{ userLoginError }}
+          </div>
+
+          <div class="success-message" *ngIf="userLoginSuccess">
+            ✅ Login successful! Redirecting to your bookings...
+          </div>
+
+          <button type="submit" class="submit-btn">Login</button>
+
+          <p class="helper-text mt-4 text-sm text-slate-600 text-center">
+            Don't have an account?
+            <a
+              href="javascript:void(0)"
+              class="ml-1 text-indigo-600 font-semibold underline cursor-pointer hover:text-indigo-700"
+              (click)="setTab('register-user')"
+            >
+              Register here
+            </a>
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <!-- User Registration -->
+    <div class="login-content" *ngIf="activeTab === 'register-user'">
+      <div class="login-card">
+        <h2>Register as User</h2>
+        <p class="login-subtitle">Create your account to book services</p>
+
+        <form (ngSubmit)="onUserRegister()" class="login-form">
+          <div class="form-group">
+            <label for="user-name">Full Name <span class="required">*</span></label>
+            <input 
+              type="text" 
+              id="user-name"
+              [(ngModel)]="userRegisterForm.name"
+              name="userName"
+              placeholder="Enter your full name"
+              class="form-input"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="user-email">Email <span class="required">*</span></label>
+            <input 
+              type="email" 
+              id="user-email"
+              [(ngModel)]="userRegisterForm.email"
+              name="userEmail"
+              placeholder="your.email@example.com"
+              class="form-input"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="user-phone">Phone <span class="required">*</span></label>
+            <input 
+              type="tel" 
+              id="user-phone"
+              [(ngModel)]="userRegisterForm.phone"
+              name="userPhone"
+              placeholder="+91 98765 43210"
+              class="form-input"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="user-password">Password <span class="required">*</span></label>
+            <input 
+              type="password" 
+              id="user-password"
+              [(ngModel)]="userRegisterForm.password"
+              name="userPassword"
+              placeholder="Minimum 6 characters"
+              class="form-input"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="user-confirm-password">Confirm Password <span class="required">*</span></label>
+            <input 
+              type="password" 
+              id="user-confirm-password"
+              [(ngModel)]="userRegisterForm.confirmPassword"
+              name="userConfirmPassword"
+              placeholder="Re-enter password"
+              class="form-input"
+              required
+            />
+          </div>
+
+          <div class="error-message" *ngIf="userRegisterError">
+            {{ userRegisterError }}
+          </div>
+
+          <div class="success-message" *ngIf="userRegisterSuccess">
+            ✅ Registration successful! Redirecting...
+          </div>
+
+          <button type="submit" class="submit-btn">Register</button>
+
+          <p class="helper-text mt-4 text-sm text-slate-600 text-center">
+            Already have an account?
+            <a
+              href="javascript:void(0)"
+              class="ml-1 text-indigo-600 font-semibold underline cursor-pointer hover:text-indigo-700"
+              (click)="setTab('user-login')"
+            >
+              Login
+            </a>
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <!-- Footer helper removed as per new spec -->
+  </div>
+</div>

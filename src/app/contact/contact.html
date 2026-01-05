@@ -28,14 +28,47 @@
     </div>
 
     <!-- CONTACT FORM -->
-    <form class="contact-form">
+    <form class="contact-form" (ngSubmit)="onSubmit()" #contactForm="ngForm">
       <h3>Send a Message</h3>
 
-      <input type="text" placeholder="Your Name" required />
-      <input type="email" placeholder="Your Email" required />
-      <textarea rows="4" placeholder="Your Message"></textarea>
+      <input
+        type="text"
+        name="name"
+        [(ngModel)]="form.name"
+        placeholder="Your Name"
+        required
+      />
+      <input
+        type="email"
+        name="email"
+        [(ngModel)]="form.email"
+        placeholder="Your Email"
+        required
+      />
+      <input
+        type="text"
+        name="subject"
+        [(ngModel)]="form.subject"
+        placeholder="Subject (optional)"
+      />
+      <textarea
+        rows="4"
+        name="message"
+        [(ngModel)]="form.message"
+        placeholder="Your Message"
+        required
+      ></textarea>
 
-      <button type="submit">Send Message</button>
+      <div class="contact-message contact-error" *ngIf="submitError">
+        {{ submitError }}
+      </div>
+      <div class="contact-message contact-success" *ngIf="submitSuccess">
+        ✅ Thank you! Your message has been sent to the admin.
+      </div>
+
+      <button type="submit" [disabled]="isSubmitting">
+        {{ isSubmitting ? 'Sending...' : 'Send Message' }}
+      </button>
     </form>
 
   </div>

@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 * {
   box-sizing: border-box;
   font-family:
@@ -9,6 +11,18 @@
     Roboto,
     Arial,
     sans-serif;
+}
+
+:host {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+router-outlet {
+  display: block;
+  width: 100%;
 }
 
 .navbar {
@@ -80,6 +94,25 @@
   color: white;
   font-weight: 600;
   cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.3s;
+}
+
+.nav-btn:hover {
+  background: #4338ca;
+}
+
+.nav-user-menu {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-user-name {
+  color: #334155;
+  font-weight: 600;
+  font-size: 14px;
 }
 
 
@@ -108,10 +141,46 @@
   text-decoration: none;
   margin-bottom: 8px;
   font-size: 14px;
+  transition: color 0.3s ease;
 }
 
 .footer a:hover {
   color: white;
+}
+
+.social-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.social-icon:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.social-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: #cbd5f5;
+  transition: fill 0.3s ease;
+}
+
+.social-icon:hover svg {
+  fill: white;
 }
 
 .footer p {

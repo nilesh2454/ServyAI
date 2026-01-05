@@ -108,3 +108,21 @@
 .contact-form button:hover {
   background: #4338ca;
 }
+
+.contact-message {
+  font-size: 14px;
+  padding: 10px 12px;
+  border-radius: 10px;
+}
+
+.contact-error {
+  background: #fee2e2;
+  border: 1px solid #ef4444;
+  color: #991b1b;
+}
+
+.contact-success {
+  background: #d1fae5;
+  border: 1px solid #16a34a;
+  color: #065f46;
+}

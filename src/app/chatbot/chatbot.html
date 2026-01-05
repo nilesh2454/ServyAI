@@ -1,0 +1,189 @@
+<!-- Floating Chatbot Button -->
+<button 
+  (click)="toggleChat()" 
+  class="chatbot-button"
+  [class.hidden]="isOpen"
+  type="button"
+>
+  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+  </svg>
+  <span class="chatbot-notification"></span>
+</button>
+
+<!-- Chatbot Window -->
+<div 
+  *ngIf="isOpen"
+  class="chatbot-window"
+>
+  <!-- Header -->
+  <div class="chatbot-header">
+    <div class="chatbot-header-content">
+      <div class="chatbot-avatar">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+        </svg>
+      </div>
+      <div>
+        <h3 class="chatbot-title">ServyAI Assistant</h3>
+        <p class="chatbot-subtitle">We're online</p>
+      </div>
+    </div>
+    <button 
+      (click)="closeChat()" 
+      class="chatbot-close"
+      type="button"
+    >
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Messages Container -->
+  <div 
+    #chatContainer
+    class="chatbot-messages"
+  >
+    <div 
+      *ngFor="let message of messages" 
+      class="message-wrapper"
+      [ngClass]="{'user': message.type === 'user', 'bot': message.type === 'bot'}"
+    >
+      <div class="message-content-wrapper">
+        <!-- Avatar -->
+        <div 
+          *ngIf="message.type === 'bot'"
+          class="message-avatar bot"
+        >
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+          </svg>
+        </div>
+        <div 
+          *ngIf="message.type === 'user'"
+          class="message-avatar user"
+        >
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+          </svg>
+        </div>
+
+        <!-- Message Bubble -->
+        <div 
+          class="message-bubble"
+          [ngClass]="{'bot': message.type === 'bot', 'user': message.type === 'user'}"
+        >
+          <p class="message-text" *ngIf="message.content">
+            {{ message.content }}
+          </p>
+
+          <!-- Service Cards -->
+          <div *ngIf="message.services && message.services.length > 0" class="chatbot-services">
+            <div 
+              *ngFor="let service of message.services"
+              class="chatbot-service-card"
+            >
+              <div class="service-card-header-chat">
+                <h4>{{ service.name }}</h4>
+                <span class="service-rating-chat">⭐ {{ service.rating }}</span>
+              </div>
+              <p class="service-info-chat">{{ service.categoryIcon }} {{ service.category }}</p>
+              <p class="service-info-chat">📍 {{ service.location }}</p>
+              <p class="service-info-chat price">💰 ₹{{ service.price }}/visit</p>
+              <div class="service-card-actions-chat">
+                <a 
+                  [href]="'tel:' + service.phone.replace(/\s/g, '')" 
+                  class="service-action-btn call"
+                >
+                  📞 Call
+                </a>
+                <a 
+                  [href]="'https://wa.me/' + service.whatsapp" 
+                  target="_blank"
+                  class="service-action-btn whatsapp"
+                >
+                  💬 WhatsApp
+                </a>
+                <button 
+                  (click)="bookService(service)"
+                  class="service-action-btn book"
+                  type="button"
+                >
+                  📅 Book
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <span class="message-time">{{ message.timestamp | date: 'shortTime' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Typing Indicator -->
+    <div *ngIf="isLoading" class="typing-indicator-wrapper">
+      <div class="typing-indicator-content">
+        <div class="typing-avatar">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+          </svg>
+        </div>
+        <div class="typing-dots-container">
+          <div class="typing-dots">
+            <span class="typing-dot"></span>
+            <span class="typing-dot"></span>
+            <span class="typing-dot"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Input Area -->
+  <div class="chatbot-input-area">
+    <div class="chatbot-input-wrapper">
+      <input 
+        type="text"
+        #messageInput
+        [(ngModel)]="userMessage"
+        (keyup.enter)="sendMessage()"
+        placeholder="Type your message..."
+        class="chatbot-input"
+      />
+      <button 
+        (click)="sendMessage()"
+        [disabled]="!userMessage.trim() || isLoading"
+        class="chatbot-send-btn"
+        type="button"
+      >
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="chatbot-suggestions">
+      <button 
+        (click)="userMessage = 'I need a plumber'; sendMessage()"
+        class="chatbot-suggestion-chip"
+        type="button"
+      >
+        🔧 Plumber
+      </button>
+      <button 
+        (click)="userMessage = 'Show me electrician services'; sendMessage()"
+        class="chatbot-suggestion-chip"
+        type="button"
+      >
+        ⚡ Electrician
+      </button>
+      <button 
+        (click)="userMessage = 'Find cleaning services'; sendMessage()"
+        class="chatbot-suggestion-chip"
+        type="button"
+      >
+        🧹 Cleaning
+      </button>
+    </div>
+  </div>
+</div>

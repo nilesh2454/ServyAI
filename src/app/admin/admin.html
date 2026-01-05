@@ -1,0 +1,454 @@
+<div class="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 pb-16">
+  <!-- Admin login shown when not authenticated as admin -->
+  <div class="admin-login-wrapper" *ngIf="!isAdmin(); else adminDashboard">
+    <div class="admin-login-card">
+      <div class="admin-login-header">
+        <h2>Admin Login</h2>
+        <p class="admin-login-subtitle">Enter your admin credentials to access the dashboard</p>
+      </div>
+
+      <form (ngSubmit)="onAdminLogin()" class="admin-login-form">
+        <div class="admin-form-group">
+          <label for="admin-email">Email</label>
+          <input 
+            type="email" 
+            id="admin-email"
+            [(ngModel)]="adminLoginForm.email"
+            name="adminEmail"
+            placeholder="admin@servyai.com"
+            class="admin-form-input"
+            required
+          />
+        </div>
+
+        <div class="admin-form-group">
+          <label for="admin-password">Password</label>
+          <input 
+            type="password" 
+            id="admin-password"
+            [(ngModel)]="adminLoginForm.password"
+            name="adminPassword"
+            placeholder="Enter password"
+            class="admin-form-input"
+            required
+          />
+        </div>
+
+        <div class="admin-error-message" *ngIf="adminLoginError">
+          {{ adminLoginError }}
+        </div>
+
+        <div class="admin-success-message" *ngIf="adminLoginSuccess">
+          ✅ Login successful! Loading dashboard...
+        </div>
+
+        <button type="submit" class="admin-submit-btn">Login as Admin</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Actual dashboard when admin is logged in -->
+  <ng-template #adminDashboard>
+    <div class="admin-dashboard-container">
+      <!-- Dashboard Header -->
+      <div class="admin-dashboard-header">
+        <h1 class="admin-dashboard-title">Admin Dashboard</h1>
+        <p class="admin-dashboard-subtitle">Manage bookings, users, and service providers</p>
+      </div>
+
+      <!-- Overview cards -->
+      <div class="admin-overview-cards">
+        <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-blue-500 hover:shadow-xl transition-shadow">
+          <h3 class="text-slate-600 text-sm font-semibold uppercase mb-2">Total Bookings</h3>
+          <p class="text-4xl font-bold text-slate-900">{{ totalBookings }}</p>
+        </div>
+        <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-green-500 hover:shadow-xl transition-shadow">
+          <h3 class="text-slate-600 text-sm font-semibold uppercase mb-2">Total Providers</h3>
+          <p class="text-4xl font-bold text-slate-900">{{ totalServices }}</p>
+        </div>
+        <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-purple-500 hover:shadow-xl transition-shadow">
+          <h3 class="text-slate-600 text-sm font-semibold uppercase mb-2">Active Bookings</h3>
+          <p class="text-4xl font-bold text-slate-900">{{ activeBookingsCount }}</p>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="admin-tabs-container">
+        <button 
+          [class.border-indigo-600]="activeTab === 'bookings'"
+          (click)="setTab('bookings')"
+        >
+          📋 Bookings ({{ bookings.length }})
+        </button>
+        <button 
+          [class.border-indigo-600]="activeTab === 'users'"
+          (click)="setTab('users')"
+        >
+          👥 Users ({{ users.length }})
+        </button>
+        <button 
+          [class.border-indigo-600]="activeTab === 'providers'"
+          (click)="setTab('providers')"
+        >
+          🏢 Providers ({{ providers.length }})
+        </button>
+        <button 
+          [class.border-indigo-600]="activeTab === 'contacts'"
+          (click)="setTab('contacts')"
+        >
+          ✉️ Contacts ({{ contacts.length }})
+        </button>
+      </div>
+
+      <!-- Bookings Tab -->
+      <div class="admin-tab-content" *ngIf="activeTab === 'bookings'">
+        <div class="admin-filter-section">
+          <label for="status-filter" class="admin-filter-label">Filter by Status:</label>
+          <select 
+            id="status-filter" 
+            [(ngModel)]="filterStatus" 
+            (change)="onFilterChange()"
+            class="admin-filter-select"
+          >
+            <option value="all">All Bookings</option>
+            <option value="pending">Pending</option>
+            <option value="confirmed">Confirmed</option>
+            <option value="completed">Completed</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </div>
+
+        <div class="admin-table-wrapper">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Service</th>
+                <th>Customer</th>
+                <th>Location</th>
+                <th>Date & Time</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let booking of getFilteredBookings()">
+                <td>
+                  <div class="admin-table-name">{{ booking.serviceName }}</div>
+                  <div class="admin-table-muted">{{ booking.serviceCategory }}</div>
+                </td>
+                <td>
+                  <div>{{ booking.customerName }}</div>
+                  <div class="admin-table-muted">{{ booking.customerEmail }}</div>
+                  <div class="admin-table-muted">{{ booking.customerPhone }}</div>
+                </td>
+                <td>{{ booking.serviceLocation }}</td>
+                <td>
+                  <div>{{ formatDate(booking.date) }}</div>
+                  <div class="admin-table-muted">{{ booking.time }}</div>
+                </td>
+                <td>
+                  <span class="status-badge" [ngClass]="getStatusClass(booking.status)">
+                    {{ booking.status | titlecase }}
+                  </span>
+                </td>
+                <td>
+                  <div class="admin-action-group">
+                    <select 
+                      (change)="updateBookingStatus(booking.id, $any($event.target).value)"
+                      [value]="booking.status"
+                      class="admin-status-select"
+                    >
+                      <option value="pending">Pending</option>
+                      <option value="confirmed">Confirmed</option>
+                      <option value="completed">Completed</option>
+                      <option value="cancelled">Cancelled</option>
+                    </select>
+                    <button 
+                      class="admin-delete-btn"
+                      (click)="deleteBooking(booking.id)"
+                      title="Delete Booking"
+                    >
+                      🗑️
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="admin-no-data" *ngIf="getFilteredBookings().length === 0">
+            No bookings found
+          </div>
+        </div>
+      </div>
+
+      <!-- Contacts Tab -->
+      <div class="admin-tab-content" *ngIf="activeTab === 'contacts'">
+        <div class="admin-table-wrapper">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>From</th>
+                <th>Email</th>
+                <th>Subject</th>
+                <th>Message</th>
+                <th>Received</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let msg of contacts">
+                <td class="admin-table-name">{{ msg.name }}</td>
+                <td>{{ msg.email }}</td>
+                <td>{{ msg.subject }}</td>
+                <td style="max-width: 320px;">
+                  <div class="admin-table-muted">{{ msg.message }}</div>
+                </td>
+                <td>{{ formatDate(msg.createdAt) }}</td>
+                <td>
+                  <span class="status-badge" [ngClass]="msg.status === 'new' ? 'status-pending' : 'status-completed'">
+                    {{ msg.status | titlecase }}
+                  </span>
+                </td>
+                <td>
+                  <div class="admin-action-group">
+                    <button
+                      class="admin-approve-btn"
+                      *ngIf="msg.status === 'new'"
+                      (click)="markContactResolved(msg.id)"
+                    >
+                      Mark Resolved
+                    </button>
+                    <button
+                      class="admin-delete-btn"
+                      (click)="deleteContact(msg.id)"
+                      title="Delete Message"
+                    >
+                      🗑️
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="admin-no-data" *ngIf="contacts.length === 0">
+            No contact messages yet.
+          </div>
+        </div>
+      </div>
+      <!-- Users Tab -->
+      <div class="admin-tab-content" *ngIf="activeTab === 'users'">
+        <div class="admin-section-header">
+          <button 
+            class="admin-add-btn"
+            (click)="showAddUserForm = !showAddUserForm"
+          >
+            + Add New User
+          </button>
+        </div>
+
+        <div class="admin-add-form" *ngIf="showAddUserForm">
+          <h3 class="admin-form-title">Add New User</h3>
+          <div class="admin-form-grid">
+            <input 
+              type="text" 
+              placeholder="Name" 
+              [(ngModel)]="newUser.name"
+              class="admin-form-input"
+            />
+            <input 
+              type="email" 
+              placeholder="Email" 
+              [(ngModel)]="newUser.email"
+              class="admin-form-input"
+            />
+            <input 
+              type="tel" 
+              placeholder="Phone" 
+              [(ngModel)]="newUser.phone"
+              class="admin-form-input"
+            />
+            <select 
+              [(ngModel)]="newUser.role"
+              class="admin-form-input"
+            >
+              <option value="user">User</option>
+              <option value="provider">Provider</option>
+              <option value="admin">Admin</option>
+            </select>
+            <div class="admin-form-actions">
+              <button 
+                class="admin-save-btn"
+                (click)="addUser()"
+              >
+                Save
+              </button>
+              <button 
+                class="admin-cancel-btn"
+                (click)="showAddUserForm = false"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="admin-table-wrapper">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Role</th>
+                <th>Joined</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of users">
+                <td class="admin-table-name">{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.phone }}</td>
+                <td>
+                  <span class="role-badge" [ngClass]="'role-' + user.role">
+                    {{ user.role | titlecase }}
+                  </span>
+                </td>
+                <td>{{ formatDate(user.createdAt) }}</td>
+                <td>
+                  <button 
+                    class="admin-delete-btn"
+                    (click)="deleteUser(user.id)"
+                    title="Delete User"
+                  >
+                    🗑️
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Providers Tab -->
+      <div class="admin-tab-content" *ngIf="activeTab === 'providers'">
+        <div class="admin-section-header">
+          <button 
+            class="admin-add-btn"
+            (click)="showAddProviderForm = !showAddProviderForm"
+          >
+            + Add New Provider
+          </button>
+        </div>
+
+        <div class="admin-add-form" *ngIf="showAddProviderForm">
+          <h3 class="admin-form-title">Add New Provider</h3>
+          <div class="admin-form-grid">
+            <input 
+              type="text" 
+              placeholder="Name" 
+              [(ngModel)]="newProvider.name"
+              class="admin-form-input"
+            />
+            <input 
+              type="email" 
+              placeholder="Email" 
+              [(ngModel)]="newProvider.email"
+              class="admin-form-input"
+            />
+            <input 
+              type="tel" 
+              placeholder="Phone" 
+              [(ngModel)]="newProvider.phone"
+              class="admin-form-input"
+            />
+            <input 
+              type="text" 
+              placeholder="Service Category" 
+              [(ngModel)]="newProvider.serviceCategory"
+              class="admin-form-input"
+            />
+            <input 
+              type="text" 
+              placeholder="Location" 
+              [(ngModel)]="newProvider.location"
+              class="admin-form-input"
+            />
+            <input 
+              type="number" 
+              placeholder="Price" 
+              [(ngModel)]="newProvider.price" 
+              min="0"
+              class="admin-form-input"
+            />
+            <div class="admin-form-actions">
+              <button 
+                class="admin-save-btn"
+                (click)="addProvider()"
+              >
+                Save
+              </button>
+              <button 
+                class="admin-cancel-btn"
+                (click)="showAddProviderForm = false"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="admin-table-wrapper">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Category</th>
+                <th>Location</th>
+                <th>Status</th>
+                <th>Price</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let provider of providers">
+                <td class="admin-table-name">{{ provider.name }}</td>
+                <td>{{ provider.email }}</td>
+                <td>{{ provider.phone }}</td>
+                <td>{{ provider.serviceCategory }}</td>
+                <td>{{ provider.location }}</td>
+                <td>
+                  <span class="status-badge" [ngClass]="provider.status === 'approved' ? 'status-confirmed' : 'status-pending'">
+                    {{ provider.status | titlecase }}
+                  </span>
+                </td>
+                <td class="admin-table-name">₹{{ provider.price }}/visit</td>
+                <td>
+                  <div class="admin-action-group">
+                    <button 
+                      class="admin-approve-btn"
+                      *ngIf="provider.status === 'pending'"
+                      (click)="approveProvider(provider.id)"
+                    >
+                      ✅ Approve
+                    </button>
+                    <button 
+                      class="admin-delete-btn"
+                      (click)="deleteProvider(provider.id)"
+                      title="Delete Provider"
+                    >
+                      🗑️
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>
