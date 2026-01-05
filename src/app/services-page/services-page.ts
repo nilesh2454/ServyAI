@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Service, SERVICES_DATA } from '../Interface/service';
@@ -12,7 +12,7 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './services-page.html',
   styleUrl: './services-page.css',
 })
-export class ServicesPage {
+export class ServicesPage implements OnInit {
   allServices: Service[] = SERVICES_DATA;
   filteredServices: Service[] = SERVICES_DATA;
   
@@ -25,8 +25,23 @@ export class ServicesPage {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private authService: AuthService
   ) {}
+
+  ngOnInit() {
+    // Read query parameters from URL
+    this.route.queryParams.subscribe(params => {
+      if (params['service']) {
+        this.searchService = params['service'];
+      }
+      if (params['location']) {
+        this.searchLocation = params['location'];
+      }
+      // Apply filters after reading params
+      this.applyFilters();
+    });
+  }
 
   onSearch() {
     this.applyFilters();

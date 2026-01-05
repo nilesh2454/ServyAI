@@ -24,36 +24,7 @@
         [(ngModel)]="searchLocation"
         (keyup.enter)="onSearch()"
       />
-      <button (click)="onSearch()">Search</button>
-    </div>
-  </div>
-</section>
-
-<section class="why-choose-section">
-  <div class="why-choose-container">
-    <h2 class="section-heading">Why Choose ServyAI?</h2>
-
-    <div class="info-grid">
-      <div class="info-card">
-        <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-        </svg>
-        <p>Instant Service Discovery</p>
-      </div>
-
-      <div class="info-card">
-        <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 3a2.25 2.25 0 00-2.25 2.25v1.5H6A2.25 2.25 0 003.75 9v6A2.25 2.25 0 006 17.25h12A2.25 2.25 0 0020.25 15V9A2.25 2.25 0 0018 6.75h-1.5v-1.5A2.25 2.25 0 0014.25 3h-4.5z" />
-        </svg>
-        <p>AI-Powered Recommendations</p>
-      </div>
-
-      <div class="info-card">
-        <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3l2 5-2 1a16 16 0 006 6l1-2 5 2v3a2 2 0 01-2 2A18 18 0 013 5z" />
-        </svg>
-        <p>Call & WhatsApp Support</p>
-      </div>
+      <button type="button" (click)="onSearch()">Search</button>
     </div>
   </div>
 </section>
@@ -114,6 +85,35 @@
 
     <div class="view-all-wrapper">
       <button class="view-all-btn" routerLink="/services">View All Services →</button>
+    </div>
+  </div>
+</section>
+
+<section class="why-choose-section">
+  <div class="why-choose-container">
+    <h2 class="section-heading">Why Choose ServyAI?</h2>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+        <p>Instant Service Discovery</p>
+      </div>
+
+      <div class="info-card">
+        <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 3a2.25 2.25 0 00-2.25 2.25v1.5H6A2.25 2.25 0 003.75 9v6A2.25 2.25 0 006 17.25h12A2.25 2.25 0 0020.25 15V9A2.25 2.25 0 0018 6.75h-1.5v-1.5A2.25 2.25 0 0014.25 3h-4.5z" />
+        </svg>
+        <p>AI-Powered Recommendations</p>
+      </div>
+
+      <div class="info-card">
+        <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3l2 5-2 1a16 16 0 006 6l1-2 5 2v3a2 2 0 01-2 2A18 18 0 013 5z" />
+        </svg>
+        <p>Call & WhatsApp Support</p>
+      </div>
     </div>
   </div>
 </section>
