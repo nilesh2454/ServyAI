@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Service, SERVICES_DATA } from '../Interface/service';
@@ -8,7 +8,7 @@ import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, CommonModule, FormsModule],
+  imports: [RouterLink, CommonModule, FormsModule],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
