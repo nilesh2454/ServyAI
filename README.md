@@ -245,7 +245,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 👥 Contributors
 
 - **Nilesh D Pawar** ([@nilesh2454](https://github.com/nilesh2454))
-- **Tushar Patil** ([@tusharpatil3412](https://github.com/tusharpatil3412))
+
 
 ## 🙏 Acknowledgments
 
