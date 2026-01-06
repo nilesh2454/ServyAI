@@ -1,61 +1,271 @@
-# ServiceAI
+# 🚀 ServyAI - AI-Powered Service Finder Platform
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.4.
+<div align="center">
 
-## Development server
+![Angular](https://img.shields.io/badge/Angular-21.0.0-red?style=for-the-badge&logo=angular)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9.2-blue?style=for-the-badge&logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.1.18-38bdf8?style=for-the-badge&logo=tailwind-css)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-To start a local development server, run:
+**Find trusted local services with AI-powered recommendations**
 
-```bash
-ng serve
+[Live Demo](https://servy-ai-nine.vercel.app) • [Report Bug](https://github.com/nilesh2454/ServyAI/issues) • [Request Feature](https://github.com/nilesh2454/ServyAI/issues)
+
+</div>
+
+---
+
+## 📋 Table of Contents
+
+- [About](#-about)
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [Getting Started](#-getting-started)
+- [Project Structure](#-project-structure)
+- [Available Scripts](#-available-scripts)
+- [Key Features Explained](#-key-features-explained)
+- [Deployment](#-deployment)
+- [Contributing](#-contributing)
+- [License](#-license)
+
+## 🎯 About
+
+**ServyAI** is a modern, AI-powered service discovery platform that helps users find and connect with trusted local service providers. Whether you need a plumber, electrician, cleaner, or any other professional service, ServyAI makes it easy to discover, compare, and book services instantly.
+
+### Why ServyAI?
+
+- 🤖 **AI-Powered Assistance**: Get instant recommendations through our intelligent chatbot
+- 📍 **Location-Based Search**: Find services near you quickly
+- ⭐ **Verified Providers**: Browse services with ratings and reviews
+- 📞 **Direct Contact**: Connect via Call or WhatsApp instantly
+- 🎨 **Modern UI**: Beautiful, responsive design built with Tailwind CSS
+- 🔒 **Secure Booking**: Protected booking system with authentication
+
+## ✨ Features
+
+### Core Features
+
+- 🔍 **Advanced Search**: Search services by name, category, or location
+- 🤖 **AI Chatbot**: Interactive AI assistant to help find the right service
+- 📱 **Responsive Design**: Works seamlessly on desktop, tablet, and mobile
+- 🔐 **User Authentication**: Secure login system for booking services
+- 📅 **Booking Management**: Track and manage your service bookings
+- 👨‍💼 **Admin Dashboard**: Manage services and bookings (admin access)
+- 🎯 **Service Filtering**: Filter by category, location, and price
+- 📊 **Sorting Options**: Sort services by price (low to high / high to low)
+
+### Service Categories
+
+- 🔧 Plumber
+- ⚡ Electrician
+- 🧹 Cleaning
+- ❄️ AC Repair
+- 🪚 Carpenter
+- 🎨 Painting
+- 🐜 Pest Control
+- 💻 Computer Repair
+- 📷 CCTV Installation
+- 🌿 Gardening
+
+## 🛠️ Tech Stack
+
+### Frontend
+- **Framework**: Angular 21.0.0
+- **Language**: TypeScript 5.9.2
+- **Styling**: Tailwind CSS 4.1.18
+- **State Management**: Angular Services & RxJS
+- **Routing**: Angular Router with Guards
+
+### Development Tools
+- **Build Tool**: Angular Build (@angular/build)
+- **Package Manager**: npm 10.8.2
+- **Testing**: Vitest 4.0.8
+- **SSR**: Angular SSR (@angular/ssr)
+
+### Additional Libraries
+- **HTTP Client**: Angular HttpClient
+- **Forms**: Angular Reactive Forms & Template-driven Forms
+- **Icons**: SVG Icons & Font Awesome
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+Before you begin, ensure you have the following installed:
+- **Node.js** (v18 or higher)
+- **npm** (v10.8.2 or higher)
+- **Angular CLI** (v21.0.4)
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/nilesh2454/ServyAI.git
+   cd ServyAI
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**
+   ```bash
+   npm start
+   # or
+   ng serve
+   ```
+
+4. **Open your browser**
+   Navigate to `http://localhost:4200/`
+
+The application will automatically reload when you modify any source files.
+
+## 📁 Project Structure
+
+```
+ServyAI/
+├── src/
+│   ├── app/
+│   │   ├── about/              # About page component
+│   │   ├── admin/              # Admin dashboard
+│   │   ├── book-service/       # Service booking component
+│   │   ├── bookings/           # User bookings page
+│   │   ├── chatbot/            # AI chatbot component
+│   │   ├── contact/            # Contact page
+│   │   ├── guards/             # Route guards (auth, admin)
+│   │   ├── home/               # Home page with search
+│   │   ├── Interface/          # TypeScript interfaces
+│   │   │   ├── booking.ts      # Booking interface
+│   │   │   └── service.ts      # Service interface & data
+│   │   ├── login/              # Login component
+│   │   ├── services/           # Angular services
+│   │   │   ├── auth.service.ts
+│   │   │   └── booking.service.ts
+│   │   ├── services-page/      # Services listing page
+│   │   ├── app.config.ts       # App configuration
+│   │   ├── app.routes.ts       # Route definitions
+│   │   └── app.ts              # Root component
+│   ├── assets/                 # Static assets (images, icons)
+│   ├── index.html              # Main HTML file
+│   ├── main.ts                 # Application entry point
+│   └── styles.css              # Global styles
+├── public/                     # Public assets
+├── angular.json                # Angular configuration
+├── package.json                # Dependencies & scripts
+├── tsconfig.json               # TypeScript configuration
+└── README.md                   # This file
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 📜 Available Scripts
 
-## Code scaffolding
+| Command | Description |
+|---------|-------------|
+| `npm start` | Start development server on `http://localhost:4200` |
+| `npm run build` | Build the project for production |
+| `npm run watch` | Build and watch for changes |
+| `npm test` | Run unit tests with Vitest |
+| `npm run serve:ssr:serviceAI` | Serve SSR build locally |
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🎨 Key Features Explained
+
+### 1. Service Search & Discovery
+- **Home Page Search**: Quick search by service type and location
+- **Advanced Filtering**: Filter by category, location, and price range
+- **Smart Sorting**: Sort services by price or rating
+
+### 2. AI Chatbot Assistant
+- **Natural Language Processing**: Ask questions in plain English
+- **Service Recommendations**: Get personalized service suggestions
+- **Interactive Interface**: Chat-like experience with instant responses
+
+### 3. Booking System
+- **Secure Booking**: Protected routes with authentication guards
+- **Booking Form**: Comprehensive form with validation
+- **Booking History**: View all your past and upcoming bookings
+
+### 4. Direct Contact
+- **One-Click Calling**: Direct phone call integration
+- **WhatsApp Integration**: Instant WhatsApp messaging
+- **Service Details**: Complete information about each provider
+
+### 5. Admin Dashboard
+- **Service Management**: Add, edit, or remove services
+- **Booking Overview**: Monitor all bookings
+- **User Management**: Manage user accounts
+
+## 🚢 Deployment
+
+### Build for Production
 
 ```bash
-ng generate component component-name
+npm run build
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+The build artifacts will be stored in the `dist/` directory.
 
-```bash
-ng generate --help
-```
+### Deploy to Vercel
 
-## Building
+The project is configured for Vercel deployment:
 
-To build the project run:
+1. Push your code to GitHub
+2. Connect your repository to Vercel
+3. Vercel will automatically detect Angular and deploy
 
-```bash
-ng build
-```
+**Live Demo**: [servy-ai-nine.vercel.app](https://servy-ai-nine.vercel.app)
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### Environment Variables
 
-## Running unit tests
+Currently, the project uses mock data. For production, you may want to configure:
+- API endpoints
+- Authentication keys
+- Database connections
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## 🤝 Contributing
 
-```bash
-ng test
-```
+Contributions are welcome! Please follow these steps:
 
-## Running end-to-end tests
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-For end-to-end (e2e) testing, run:
+### Code Style
 
-```bash
-ng e2e
-```
+- Follow Angular style guide
+- Use TypeScript strict mode
+- Write meaningful commit messages
+- Add comments for complex logic
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## 📝 License
 
-## Additional Resources
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-"# ServyAI" 
-"# ServyAI" 
+## 👥 Contributors
+
+- **Nilesh D Pawar** ([@nilesh2454](https://github.com/nilesh2454))
+- **Tushar Patil** ([@tusharpatil3412](https://github.com/tusharpatil3412))
+
+## 🙏 Acknowledgments
+
+- Angular team for the amazing framework
+- Tailwind CSS for the utility-first CSS framework
+- All contributors and users of this project
+
+## 📞 Support
+
+If you have any questions or need help, please:
+- Open an [issue](https://github.com/nilesh2454/ServyAI/issues)
+- Contact the maintainers
+- Check the [documentation](https://angular.dev)
+
+---
+
+<div align="center">
+
+**Made with ❤️ using Angular**
+
+⭐ Star this repo if you find it helpful!
+
+</div>

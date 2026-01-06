@@ -44,7 +44,6 @@ router-outlet {
   box-shadow: 0 8px 32px rgba(31, 38, 135, 0.12);
 }
 
-/* LOGO */
 .logo {
   font-size: 22px;
   font-weight: 700;
@@ -116,6 +115,8 @@ router-outlet {
 }
 
 
+/* ================= FOOTER ================= */
+
 .footer {
   background: #0f172a;
   color: #cbd5f5;
@@ -131,8 +132,13 @@ router-outlet {
 
 .footer h3,
 .footer h4 {
-  color: white;
+  color: #ffffff;
   margin-bottom: 12px;
+}
+
+.footer p {
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 .footer a {
@@ -145,78 +151,101 @@ router-outlet {
 }
 
 .footer a:hover {
-  color: white;
+  color: #ffffff;
 }
 
+/* Social icons container */
 .social-icons {
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+  align-items: center;
+  gap: 14px;
   margin-top: 16px;
+  flex-wrap: wrap;
 }
 
+/* Icon box */
 .social-icon {
   width: 40px;
   height: 40px;
+  background: #ffffff;
+  border-radius: 10px;
+  padding-left: 3px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
+
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
+
   text-decoration: none;
 }
 
-.social-icon:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
-}
-
+/* SVG icon */
 .social-icon svg {
-  width: 20px;
-  height: 20px;
-  fill: #cbd5f5;
-  transition: fill 0.3s ease;
+  width: 35px;
+  height: 40px;
+  fill: #000000;
+  padding: 2px; /* Dark gray */
+  transition: transform 0.3s ease, fill 0.3s ease;
 }
 
+/* Hover effect */
+.social-icon:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Hover animation on icon */
 .social-icon:hover svg {
-  fill: white;
+  transform: scale(1.15);
 }
 
-.footer p {
-  font-size: 14px;
-  line-height: 1.6;
+/* Platform-specific hover colors */
+.social-icon[title="Instagram"]:hover svg {
+  fill: #E1306C;
 }
+
+.social-icon[title="Twitter / X"]:hover svg {
+  fill: #000000;
+}
+
+.social-icon[title="LinkedIn"]:hover svg {
+  fill: #0A66C2;
+}
+
+.social-icon[title="GitHub"]:hover svg {
+  fill: #181717;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+  .social-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .social-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+
+/* ================= COPYRIGHT ================= */
 
 .footer .copyright {
   text-align: center;
   font-size: 13px;
   opacity: 0.7;
+  margin-top: 20px;
 }
 
+/* ================= RESPONSIVE ================= */
+
 @media (max-width: 768px) {
-  .nav-links {
-    display: none;
-  }
-
-  .hero h1 {
-    font-size: 34px;
-  }
-
-  .search-box {
-    flex-direction: column;
-  }
-
-  .info,
-  .services-preview {
-    padding: 0 20px;
-  }
-
-  .ai-cta {
-    margin: 0 20px;
-  }
-
   .footer {
     padding: 40px 20px 20px;
   }
+
+  
 }
