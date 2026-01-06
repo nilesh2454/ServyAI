@@ -199,73 +199,13 @@ ServyAI/
 ### Build for Production
 
 ```bash
-npm run build
+ng e2e
 ```
 
-The build artifacts will be stored in the `dist/` directory.
+Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
 
-### Deploy to Vercel
+## Additional Resources
 
-The project is configured for Vercel deployment:
-
-1. Push your code to GitHub
-2. Connect your repository to Vercel
-3. Vercel will automatically detect Angular and deploy
-
-**Live Demo**: [servy-ai-nine.vercel.app](https://servy-ai-nine.vercel.app)
-
-### Environment Variables
-
-Currently, the project uses mock data. For production, you may want to configure:
-- API endpoints
-- Authentication keys
-- Database connections
-
-## 🤝 Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-### Code Style
-
-- Follow Angular style guide
-- Use TypeScript strict mode
-- Write meaningful commit messages
-- Add comments for complex logic
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 👥 Contributors
-
-- **Nilesh D Pawar** ([@nilesh2454](https://github.com/nilesh2454))
-- **Tushar Patil** ([@tusharpatil3412](https://github.com/tusharpatil3412))
-
-## 🙏 Acknowledgments
-
-- Angular team for the amazing framework
-- Tailwind CSS for the utility-first CSS framework
-- All contributors and users of this project
-
-## 📞 Support
-
-If you have any questions or need help, please:
-- Open an [issue](https://github.com/nilesh2454/ServyAI/issues)
-- Contact the maintainers
-- Check the [documentation](https://angular.dev)
-
----
-
-<div align="center">
-
-**Made with ❤️ using Angular**
-
-⭐ Star this repo if you find it helpful!
-
-</div>
+For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+"# ServyAI" 
+"# ServyAI" 
